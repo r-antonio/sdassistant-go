@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+service SharingService {
+    rpc Upload(stream Chunk) returns (Status) {}
+    rpc ShareLink(Link) returns (Status) {}
+}
+
+enum StatusCode {
+    Unknown = 0;
+    Ok = 1;
+    Failed = 2;
+}
+
+message Status {
+    string Message = 1;
+    StatusCode Code = 2;
+}
+
+message Link {
+    string url = 1;
+}
+
+message Chunk {
+    bytes Content = 1;
+}
